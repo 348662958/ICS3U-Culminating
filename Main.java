@@ -25,7 +25,7 @@ class Main {
                         System.out.print("Category: ");
                         s_categories.add(sc.nextLine());
                         System.out.print("Hourly Rate: ");
-                        double rate = Double.parseDouble(sc.nextLine());
+                        s_rate = sc.nextDouble();
                         s_booked.add(true);
                         
                         
@@ -36,9 +36,25 @@ class Main {
                     break;
                     
                 case 2: {
-                    
+                    for(int i = 0; i < categories.length; i++){
+                        System.out.print((i+1) + ". " + categories[i]);
+                    }
+                    System.out.print("Enter category number: ");
+                    int c_index = sc.nextInt() - 1;
+                    while (c_index < 0 || c_Index >= categories.length){
+                        System.out.print("You did not choose a category. Enter Category number:");
+                        c_index = sc.nextInt();
+                    }
+                    String selected_c = categories[c_index];
+                    ArrayList<Integer> matches = new ArrayList<Integer>();
+                    System.out.print("Service in "+ selected_c + ":");
+                    for(int i = 0;i < s_Names.size(); i++);{
+                        if (s_categories.get(i).equalsIngoreCase(selected_c)){
+                            System.out.println()
+                        }
+                    }
                 }
             }
-            
+        }
     }
 }
