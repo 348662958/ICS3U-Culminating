@@ -48,11 +48,18 @@ class Main {
                     String selected_c = categories[c_index];
                     ArrayList<Integer> matches = new ArrayList<Integer>();
                     System.out.print("Service in "+ selected_c + ":");
-                    for(int i = 0;i < s_Names.size(); i++);{
+                    for(int i = 0;i < s_names.size(); i++);{
                         if (s_categories.get(i).equalsIngoreCase(selected_c)){
-                            System.out.println()
+                            System.out.println((i+1) + ". " + s_names.get(i) + " - $" + s_rates.get(i) + " - " +
+                                    (s_booked.get(i) ? "Available" : "Fully Booked"));
+                            matches.add(i);
                         }
                     }
+                    if (matches.length() == 0) {
+                        System.out.println("There are no services in this category.");
+                        break;
+                    }
+                    
                 }
             }
         }
