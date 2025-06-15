@@ -106,7 +106,6 @@ class Main {
                                         System.out.println((i+1) + ". " + s_names.get(idx) + " - $" + s_rates.get(idx));
                                     }
                                 }
-                                
                                 break;
                             case 2: // view cart
                                 if (cart.size() == 0) {
@@ -214,16 +213,14 @@ class Main {
                                     System.out.println(s_names.get(idx) + " - $" + s_rates.get(idx));
                                     total += s_rates.get(idx);
                                 }
-                                System.out.println("Total: $" + total);
-                                System.out.println("Your order has been confirmed. Thank you!");
+                                System.out.println("Total per hour: $" + total);
+                                System.out.println("Your order has been confirmed. Thank you for doing buisness on your Local Serivce Marketplace!");
                                 cart.clear();
+                                sc.nextLine();
                                 backToMain = true;
+
                             break;
                         
-                        case 4: // Back to Main Menu
-                                backToMain = true;
-                                break;
-                                
                             default:
                                 System.out.println("Invalid option.");
                         }
