@@ -18,7 +18,7 @@ class Main {
         ArrayList<String> categories = new ArrayList<String>();
         categories.add("Tutoring"); categories.add("Plumbing"); categories.add("Cleaning");
         
-        boolean run = true;
+        boolean run = true; //will allow us to loop the main menu
         while (run){
             System.out.print("Welcome to the Local Service Marketplace \n1. Add a Service \n2. Book a Service \nEnter Option (0 to exit): ");
             
@@ -27,14 +27,14 @@ class Main {
             
             switch (option){
                 case 0: // to exit
-                    System.out.println("Exiting. Please come again, Bye!");
+                    System.out.println("Exiting. Please use Local Service Marketplace again, Bye!");
                     run = false;
                     break;
                 case 1: // to add services
                     while(true){
                         System.out.print("Service name: ");
                         s_names.add(sc.nextLine());
-                        System.out.print("Category (frist letter MUST be uppercase): ");
+                        System.out.print("Category (frist letter MUST be uppercase): "); //Must be uppercase so that there will not be any repeating categroies
                         String cat = sc.nextLine();
                         s_categories.add(cat);
                         if(!categories.contains(cat))
@@ -50,22 +50,22 @@ class Main {
                     }
                     break;
                     
-                case 2: // to book a service
-                    boolean backToMain = false;
+                case 2: // to book a service, to edit the cart, checkout
+                    boolean backToMain = false; // keeps us within the subOptions until we have completed checkout
                     while (!backToMain){
                         System.out.print("1. Browse Services \n2. View/Update Cart \n3. Checkout \nEnter Option: ");
                         int subOption = sc.nextInt();
                         sc.nextLine();
                         
                         switch (subOption){
-                            case 1: // to actually browse the services
-                                System.out.println("Available Categories: ");
+                            case 1: // to browse/book the services
+                                System.out.println("Categories: ");
                                 for(int i = 0; i < categories.size(); i++){
                                     System.out.println((i+1) + ". " + categories.get(i));
                                 }
                                 System.out.print("Enter category number: ");
                                 int c_index = sc.nextInt() - 1;
-                                while (c_index < 0 || c_index >= categories.size()){
+                                while (c_index < 0 || c_index >= categories.size()){ //allows the user to renter a valid category instead of ending the program
                                     System.out.print("Invalide category. Enter category number: ");
                                     c_index = sc.nextInt()-1;
                                 }
@@ -75,7 +75,7 @@ class Main {
                                 ArrayList<Integer> matches = new ArrayList<Integer>();
                                 System.out.println("Service in "+ selected_c + ":");
                                 for(int i = 0; i < s_names.size(); i++){
-                                    if (s_categories.get(i).equalsIgnoreCase(selected_c)){
+                                    if (s_categories.get(i).equalsIgnoreCase(selected_c)){ // lets the user know if the service is available or not
                                         if(s_booked.get(i))
                                             System.out.println((i+1) + ". " + s_names.get(i) + " - $" + s_rates.get(i) + " - " + "Available");
                                         else
@@ -100,14 +100,14 @@ class Main {
                                     cart.add(s_index);
                                     s_booked.set(s_index, false);
                                     System.out.println("Service has been added to cart.");
-                                    System.out.println("Updated Cart: ");
+                                    System.out.println("Updated Cart: "); //shows the updated cart after every new service added
                                     for(int i = 0; i < cart.size(); i++){
                                         int idx = cart.get(i);
                                         System.out.println((i+1) + ". " + s_names.get(idx) + " - $" + s_rates.get(idx));
                                     }
                                 }
                                 break;
-                            case 2: // view cart
+                            case 2: // view/update the cart
                                 if (cart.size() == 0) {
                                     System.out.println("Your cart is empty.");
                                     break;
@@ -127,7 +127,7 @@ class Main {
                                     sc.nextLine();
                                     if (updIdx >= 0 && updIdx < cart.size()) {
                                         int oldIdx = cart.get(updIdx);
-                                        s_booked.set(oldIdx, true);
+                                        s_booked.set(oldIdx, true); // turns the old service back to avaliable
                                         cart.remove(updIdx);
                                         System.out.println("What service would you like to rebook with?");
                                         for (int i = 0; i < categories.size(); i++) {
@@ -155,7 +155,7 @@ class Main {
                                             }
                                         }
                                         
-                                        if (availableServices.size() ==0) {
+                                        if (availableServices.size() == 0) {
                                             System.out.println("No available services.");
                                             break;
                                         }
@@ -167,18 +167,17 @@ class Main {
                                             cart.set(updIdx, newServiceIdx);
                                             s_booked.set(newServiceIdx, false);
                                             System.out.println("Cart updated.");
-                                            // Display updated cart
-                                            System.out.println("\nUpdated Cart:");
+                                            System.out.println("Updated Cart:");
                                             for (int i = 0; i < cart.size(); i++) {
                                                 int idx = cart.get(i);
                                                 System.out.println((i+1) + ". " + s_names.get(idx) + " - $" + s_rates.get(idx));
                                             }
-                                        } else {
-                                            System.out.println("Invalid service.");
-                                        }
-                                    } else {
+                                        } else
+                                            System.out.println("Invalid Service.");
+                                        
+                                    } else 
                                         System.out.println("Invalid item number.");
-                                    }
+                                    
                                 } else if (choice.equalsIgnoreCase("R")) {
                                     System.out.print("Enter item number to  remove: ");
                                     int remIdx = sc.nextInt() - 1;
@@ -190,7 +189,7 @@ class Main {
                                         if (cart.size() ==0) {
                                             System.out.println("Your cart is empty.");
                                         } else {
-                                            System.out.println("\nUpdated Cart:");
+                                            System.out.println("Updated Cart:");
                                             for (int i = 0; i < cart.size(); i++) {
                                                 int idx = cart.get(i);
                                                 System.out.println((i+1) + ". " + s_names.get(idx) + " - $" + s_rates.get(idx));
@@ -221,13 +220,13 @@ class Main {
 
                             break;
                         
-                            default:
+                            default: //default of subOption
                                 System.out.println("Invalid option.");
                         }
                     }
                     break;
 
-                default:
+                default: //default of main menu
                     System.out.println("Ivalid option.");
                 
             }
